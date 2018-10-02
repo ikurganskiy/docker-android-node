@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash && \
     npm install -g yarn && \
     apt-get clean && \ 
     rm -rf \ 
-        /home/jhipster/.cache/ \ 
+        /home/root/.cache/ \ 
         /var/lib/apt/lists/* \ 
         /tmp/* \ 
         /var/tmp/*
