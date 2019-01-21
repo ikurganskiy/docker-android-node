@@ -15,8 +15,8 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash && \
 
 
 ENV ANDROID_SDK_TOOLS "4333796"
-ENV ANDROID_HOME=$PWD/.android
-ENV PATH=$PATH:$PWD/.android/platform-tools/
+ENV ANDROID_HOME=/usr/local/android
+ENV PATH=$PATH:/usr/local/android/platform-tools/
 
 RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
     && mkdir ${ANDROID_HOME} \
@@ -24,4 +24,17 @@ RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.co
     && rm -rf /tmp/sdk-tools-linux.zip
 
 RUN mkdir ~/.android/ && touch ~/.android/repositories.cfg
-RUN echo "d56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee" >> $ANDROID_HOME/licenses/android-sdk-license
+RUN yes | sdkmanager --licenses > /dev/null
+RUN yes | sdkmanager \
+  "platforms;android-23" \
+  "platforms;android-24" \
+  "platforms;android-25" \
+  "platforms;android-26" \
+  "platforms;android-27" \
+  "platforms;android-28"
+RUN yes | sdkmanager "platform-tools"
+RUN yes | sdkmanager "build-tools;28.0.3"
+RUN yes | sdkmanager \
+  "extras;android;m2repository" \
+  "extras;google;m2repository" \
+  "extras;google;google_play_services"
