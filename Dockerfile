@@ -24,4 +24,4 @@ RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.co
     && rm -rf /tmp/sdk-tools-linux.zip
 
 RUN mkdir ~/.android/ && touch ~/.android/repositories.cfg
-RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
+RUN echo "d56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee" >> $ANDROID_HOME/licenses/android-sdk-license
