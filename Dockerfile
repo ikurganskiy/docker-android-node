@@ -16,14 +16,15 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash && \
 
 ENV ANDROID_SDK_TOOLS "4333796"
 ENV ANDROID_HOME=/usr/local/android
-ENV PATH=$PATH:/usr/local/android/platform-tools/
+ENV PATH=$PATH:$ANDROID_HOME/platform-tools
+ENV PATH=$PATH:$ANDROID_HOME/tools/bin
 
 RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
     && mkdir ${ANDROID_HOME} \
     && unzip -q /tmp/sdk-tools-linux.zip -d ${ANDROID_HOME} \
     && rm -rf /tmp/sdk-tools-linux.zip
 
-RUN mkdir ~/.android/ && touch ~/.android/repositories.cfg
+RUN touch ${ANDROID_HOME}/repositories.cfg
 RUN yes | sdkmanager --licenses > /dev/null
 RUN yes | sdkmanager \
   "platforms;android-23" \
