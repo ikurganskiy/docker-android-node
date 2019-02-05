@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk
 
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash && \ 
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash && \ 
     apt-get install -y nodejs && \ 
     # upgrade npm 
     npm install -g npm && \ 
@@ -32,10 +32,10 @@ RUN yes | sdkmanager \
   "platforms;android-25" \
   "platforms;android-26" \
   "platforms;android-27" \
-  "platforms;android-28"
-RUN yes | sdkmanager "platform-tools"
-RUN yes | sdkmanager "build-tools;28.0.3"
+  "platforms;android-28" > /dev/null
+RUN yes | sdkmanager "platform-tools" > /dev/null
+RUN yes | sdkmanager "build-tools;28.0.3" > /dev/null
 RUN yes | sdkmanager \
   "extras;android;m2repository" \
   "extras;google;m2repository" \
-  "extras;google;google_play_services"
+  "extras;google;google_play_services" > /dev/null
